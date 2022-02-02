@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class LinearExtension {
-
+    //Smelliot
     private DcMotor linearExtension; //The linearExtension motor.
     private ElapsedTime elapsedTime = new ElapsedTime(); //This variable represents passed time since it has been initiated.
     private RobotHardware robot = new RobotHardware();
