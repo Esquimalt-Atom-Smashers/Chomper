@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class LinearExtension {
-    //Smelliot
+
     private DcMotor linearExtension; //The linearExtension motor.
     private ElapsedTime elapsedTime = new ElapsedTime(); //This variable represents passed time since it has been initiated.
     private RobotHardware robot = new RobotHardware();
@@ -41,7 +41,7 @@ public class LinearExtension {
      * This method extends the arm to the specified distance {@code cm}.
      * If {@code cm} is out of bounds of the extension range then the method will not be called.
      * {@code timeout} is the amount of time in seconds until the motors stop running.
-     * It is recommended to keep {@code timeout} under 2.0 seconds and don't extend the arm pass 3cm at a time.
+     * It is recommended to keep {@code timeout} under 2.0 seconds and don't extend the arm pass 3 cm at a time.
      *
      * @param cm the distance the arm will extend in centimeters, will accept a negative value to extend backwards
      * @param timeout the time (in seconds) before the motors stop even if the target location has not been reached
@@ -78,7 +78,7 @@ public class LinearExtension {
     /**
      * This method is used for controlling the extension of the arm, it calls the {@link LinearExtension#extendBy(int centimetres, double timeout)}.
      * If the gamepad button <i>Y</i> the arm is extended by 2 cm and if the gamepad button <i>B</i> is pressed the arm extends backwards for two centimeters.
-     * There is a 1 second timeout for both extensions.
+     * There is a 1-second timeout for both extensions.
      *
      * @param gamepad the controller which is getting listened for
      */
