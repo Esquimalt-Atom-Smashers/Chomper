@@ -17,11 +17,11 @@ public class LinearExtension {
     private final double WHEEL_DIAMETER_INCHES = 3.77953; //The current wheel diameter which is used for the COUNTS_PER_CENTIMETRE calculation.
     private final double PULSES_PER_CENTIMETRE = (PULSES_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415) * 2.54; // This variable is used for getting the necessary ticks / pulses for moving a distance (in centimetres).
 
-    private final double MAX_EXTENSION = 10.0; //The maximum distance the arm can extend (in centimeters).
+    private final double MAX_EXTENSION = 20.0; //The maximum distance the arm can extend (in centimeters).
     private final double EXTENSION_SPEED = .2; //The speed at which the extension motor rotates.
     private final double MINIMUM_EXTENSION = 0.0; //The minimum distance the arm can extend (in centimeters).
 
-    private double currentPosCentimetres = 0.0; //The current position of the motor (in centimetres).
+    private static double currentPosCentimetres = 0.0; //The current position of the motor (in centimetres).
 
     /**
      * Class constructor which maps the linearExtension motor and resets the encoder position.
@@ -51,12 +51,7 @@ public class LinearExtension {
         int newTargetPos;
         double projectPos;
         //Checks if the motor should extend forwards or backwards
-        if (cm < 0) {
-            newTargetPos = linearExtension.getCurrentPosition() - (int) (cm * PULSES_PER_CENTIMETRE);
-        }
-        else {
-            newTargetPos = linearExtension.getCurrentPosition() + (int) (cm * PULSES_PER_CENTIMETRE);
-        }
+        newTargetPos = linearExtension.getCurrentPosition() + (int) (cm * PULSES_PER_CENTIMETRE);
 
         projectPos = newTargetPos / PULSES_PER_CENTIMETRE;
 
@@ -89,11 +84,11 @@ public class LinearExtension {
      */
 
     public void control(Gamepad gamepad) {
-        //If the button y is pressed, extend the arm by two centimetres.
+        //If the button y is pressed, extend the arm by two point-five-centimetres.
         if (gamepad.y) {
             extendBy(2, 1.0);
         }
-        //If the button b is pressed, extend the arm backwards by two centimetres.
+        //If the button b is pressed, extend the arm backwards by two-point-five centimetres.
         if (gamepad.b) {
             extendBy(-2, 1.0);
         }

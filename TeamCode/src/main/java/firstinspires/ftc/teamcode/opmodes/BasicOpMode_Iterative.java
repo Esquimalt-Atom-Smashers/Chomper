@@ -50,7 +50,7 @@ public class BasicOpMode_Iterative extends LinearOpMode {
             linearExtension.control(gamepad2);
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Button A", "Pressed: " + gamepad1.a);
+            telemetry.addData("Linear extension Pos", linearExtension.getCurrentPositionCentimetres());
             telemetry.update();
         }
     }
