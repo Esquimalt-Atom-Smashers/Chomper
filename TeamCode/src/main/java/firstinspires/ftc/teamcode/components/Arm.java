@@ -55,12 +55,12 @@ public class Arm {
     }
 
     public void control(Gamepad gamepad) {
-
+        // haha no comments
         if (gamepad.x) {
-            rotate(45, 1.0);
+            rotate(90, 1.0);
         }
         if (gamepad.b) {
-            rotate(45, 1.0);
+            rotate(90, 1.0);
         }
 
     }
