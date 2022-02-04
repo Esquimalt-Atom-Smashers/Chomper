@@ -30,7 +30,7 @@ public class Arm {
         int newTargetRotation;
         double projectedRotation;
 
-        newTargetRotation = arm.getCurrentPosition() + (int) ( (deg / 360) * EncoderMath.PULSES_PER_MOTOR_REV);
+        newTargetRotation = arm.getCurrentPosition() + (int) ( (deg / 360) * EncoderMath.PULSES_PER_MOTOR_REV * EncoderMath.DRIVE_GEAR_REDUCTION_ARM);
 
         projectedRotation = getNumOfRotationsFromPulses(newTargetRotation);
 
@@ -57,10 +57,10 @@ public class Arm {
     public void control(Gamepad gamepad) {
         // haha no comments
         if (gamepad.x) {
-            rotate(90, 1.0);
+            rotate(360, 1.0);
         }
         if (gamepad.b) {
-            rotate(90, 1.0);
+            rotate(360, 1.0);
         }
 
     }

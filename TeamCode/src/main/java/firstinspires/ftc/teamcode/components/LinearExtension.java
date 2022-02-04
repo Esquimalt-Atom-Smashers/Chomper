@@ -54,7 +54,7 @@ public class LinearExtension {
         //If the projected position is greater or less than the bounds the method will stop and not extend
         if (projectPos > MAX_EXTENSION || projectPos < MINIMUM_EXTENSION) {
             return;
-        }
+       }
 
         currentPosCentimetres = newTargetPos / EncoderMath.PULSES_PER_CENTIMETRE;
 
