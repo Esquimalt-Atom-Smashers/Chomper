@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import firstinspires.ftc.teamcode.components.Arm;
 import firstinspires.ftc.teamcode.components.Claw;
 import firstinspires.ftc.teamcode.components.DriveBase;
 import firstinspires.ftc.teamcode.components.LinearExtension;
@@ -28,6 +29,7 @@ public class BasicOpMode_Iterative extends LinearOpMode {
         Wrist wrist = new Wrist(hardwareMap);
         LinearExtension linearExtension = new LinearExtension(hardwareMap);
         Claw claw = new Claw(hardwareMap);
+        Arm arm = new Arm(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
@@ -48,6 +50,7 @@ public class BasicOpMode_Iterative extends LinearOpMode {
             claw.openAndCloseClaw(gamepad2);
 
             linearExtension.control(gamepad2);
+            arm.control(gamepad2);
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Linear extension Pos", linearExtension.getCurrentPositionCentimetres());

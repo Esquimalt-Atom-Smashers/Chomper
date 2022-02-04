@@ -6,16 +6,13 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import firstinspires.ftc.teamcode.math.EncoderMath;
+
 public class LinearExtension {
 
     private DcMotor linearExtension; //The linearExtension motor.
     private ElapsedTime elapsedTime = new ElapsedTime(); //This variable represents passed time since it has been initiated.
     private RobotHardware robot = new RobotHardware();
-
-    private final double PULSES_PER_MOTOR_REV = 537.7; //This is the pulses / ticks per motor revolution.
-    private final double DRIVE_GEAR_REDUCTION = 1.0; //Drive gear reduction is set to 1.0 if the wheel is directly mounted to the motor shaft. If not, calculate with following formula: (number of teeth on the large gear) / (number of teeth on the small gear)
-    private final double WHEEL_DIAMETER_INCHES = 3.77953; //The current wheel diameter which is used for the COUNTS_PER_CENTIMETRE calculation.
-    private final double PULSES_PER_CENTIMETRE = (PULSES_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.1415) * 2.54; // This variable is used for getting the necessary ticks / pulses for moving a distance (in centimetres).
 
     private final double MAX_EXTENSION = 20.0; //The maximum distance the arm can extend (in centimeters).
     private final double EXTENSION_SPEED = .2; //The speed at which the extension motor rotates.
@@ -34,7 +31,6 @@ public class LinearExtension {
         linearExtension = robot.linearExtension;
         linearExtension.setDirection(DcMotorSimple.Direction.FORWARD);
         linearExtension.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        linearExtension.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     /**
@@ -47,20 +43,20 @@ public class LinearExtension {
      * @param timeout the time (in seconds) before the motors stop even if the target location has not been reached
      */
 
-    protected void extendBy(int cm, double timeout) {
+    private void extendBy(int cm, double timeout) {
         int newTargetPos;
         double projectPos;
         //Checks if the motor should extend forwards or backwards
-        newTargetPos = linearExtension.getCurrentPosition() + (int) (cm * PULSES_PER_CENTIMETRE);
+        newTargetPos = linearExtension.getCurrentPosition() + (int) (cm * EncoderMath.PULSES_PER_CENTIMETRE);
 
-        projectPos = newTargetPos / PULSES_PER_CENTIMETRE;
+        projectPos = newTargetPos / EncoderMath.PULSES_PER_CENTIMETRE;
 
         //If the projected position is greater or less than the bounds the method will stop and not extend
         if (projectPos > MAX_EXTENSION || projectPos < MINIMUM_EXTENSION) {
             return;
         }
 
-        currentPosCentimetres = newTargetPos / PULSES_PER_CENTIMETRE;
+        currentPosCentimetres = newTargetPos / EncoderMath.PULSES_PER_CENTIMETRE;
 
         linearExtension.setTargetPosition(newTargetPos);
         linearExtension.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -88,8 +84,8 @@ public class LinearExtension {
         if (gamepad.y) {
             extendBy(2, 1.0);
         }
-        //If the button b is pressed, extend the arm backwards by two-point-five centimetres.
-        if (gamepad.b) {
+        //If the button a is pressed, extend the arm backwards by two-point-five centimetres.
+        if (gamepad.a) {
             extendBy(-2, 1.0);
         }
     }
@@ -109,7 +105,7 @@ public class LinearExtension {
      */
 
     public double getCurrentPositionPulses() {
-        return currentPosCentimetres * PULSES_PER_CENTIMETRE;
+        return currentPosCentimetres * EncoderMath.PULSES_PER_CENTIMETRE;
     }
 
 
