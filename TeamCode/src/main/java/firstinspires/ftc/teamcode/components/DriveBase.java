@@ -44,10 +44,10 @@ public class DriveBase {
         double frontRightPower = Range.clip((drive - turn - rx), -1.0, 1);
         double backRightPower = Range.clip((drive + turn - rx), -1.0, 1);
 
-        leftTopMotor.setPower(frontLeftPower * .60);
-        leftBottomMotor.setPower(backLeftPower * .60);
-        rightTopMotor.setPower(frontRightPower * .60);
-        rightBottomMotor.setPower(backRightPower * .60);
+        leftTopMotor.setPower(frontLeftPower * .80);
+        leftBottomMotor.setPower(backLeftPower * .80);
+        rightTopMotor.setPower(frontRightPower * .80);
+        rightBottomMotor.setPower(backRightPower * .80);
     }
     public void spinCarousel() {
         carouselMotor.setDirection(DcMotorSimple.Direction.FORWARD);

@@ -37,17 +37,21 @@ public class BasicOpMode_Iterative extends LinearOpMode {
         runtime.reset();
 
         while (opModeIsActive()) {
+
             if (carouselIsRunning) {
                 driveBase.spinCarousel();
+                if (!gamepad1.a) {
+                    carouselIsRunning = false;
+                    driveBase.stopCarousel();
+                }
             }
-            if (gamepad1.x) carouselIsRunning = true;
-            if (gamepad1.b) carouselIsRunning = false;
+            if (gamepad1.a) carouselIsRunning = true;
 
             driveBase.drive(gamepad1);
             wrist.controlWrist(gamepad2);
             claw.openAndCloseClaw(gamepad2);
 
-            linearExtension.control(gamepad2);
+            linearExtension.control(gamepad2, telemetry);
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Button A", "Pressed: " + gamepad1.a);
