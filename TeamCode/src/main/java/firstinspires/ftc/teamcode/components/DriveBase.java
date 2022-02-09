@@ -20,6 +20,8 @@ public class DriveBase extends ComponentBase {
 
     private final double CAROUSEL_POWER = 0.5;
 
+
+
     public DriveBase(BasicOpModeIterative robot) {
         super(robot);
         hardware.init(robot.getHardwareMap());
@@ -36,14 +38,21 @@ public class DriveBase extends ComponentBase {
         if (robot.isCarouselRunning()) {
             spinCarousel();
         }
+        else {
+            stopCarousel();
+        }
 
-        robot.setCarouselRunning(robot.gamepad1.x && !robot.gamepad1.b);
+        if (robot.gamepad1.x && !robot.gamepad1.b) {
+            robot.setCarouselRunning(true);
+        } else if (robot.gamepad1.b) {
+            robot.setCarouselRunning(false);
+        }
 
         drive();
     }
 
     public void drive() {
-        Gamepad joystick = robot.gamepad2;
+        Gamepad joystick = robot.gamepad1;
 
         leftBottomMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         leftTopMotor.setDirection(DcMotorSimple.Direction.REVERSE);
