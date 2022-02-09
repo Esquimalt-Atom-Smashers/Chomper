@@ -3,17 +3,19 @@ package firstinspires.ftc.teamcode.components;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import firstinspires.ftc.teamcode.opmodes.BasicOpModeIterative;
 
-public class Claw {
+public class Claw extends ComponentBase {
 
     private Servo claw;
-    private RobotHardware robot = new RobotHardware();
+    private RobotHardware hardware = new RobotHardware();
 
     private static double INCREMENT_VAL = 0.05;
 
-    public Claw(HardwareMap hardwareMap) {
-        robot.init(hardwareMap);
-        claw = robot.clawServo;
+    public Claw(BasicOpModeIterative robot) {
+        super(robot);
+        hardware.init(robot.hardwareMap);
+        claw = hardware.clawServo;
     }
 
     public void openAndCloseClaw(Gamepad gamepad) {
@@ -26,4 +28,8 @@ public class Claw {
         }
     }
 
+    @Override
+    public void update() {
+
+    }
 }
