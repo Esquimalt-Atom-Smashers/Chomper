@@ -15,59 +15,39 @@ public class Arm extends ComponentBase {
     private ElapsedTime elapsedTime = new ElapsedTime();
     private RobotHardware hardware = new RobotHardware();
 
-    private final double MAX_ROTATION = 5.0; //Max amount of times the motor can do a full rotation
-    private final double MINIMUM_ROTATION = 0.0; //Prevents the motor from trying to spin backwards when it can't.
-    private static double currentRotation = 0.0;
+    private final double ROTATE_SPEED = .3;
+    private double currentSpeed = 0;
 
     public Arm(BasicOpModeIterative robot) {
         super(robot);
         hardware.init(robot.hardwareMap);
         arm = hardware.armMotor;
         arm.setDirection(DcMotorSimple.Direction.FORWARD);
-        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
     }
 
-    private void rotate(double deg, double timeout) {
-        int newTargetRotation;
-        double projectedRotation;
+    private void startRotate() {
+        arm.setPower(ROTATE_SPEED);
+        currentSpeed = ROTATE_SPEED;
+    }
 
-        newTargetRotation = arm.getCurrentPosition() + (int) ( (deg / 360) * EncoderMath.PULSES_PER_MOTOR_REV * EncoderMath.DRIVE_GEAR_REDUCTION_ARM);
-
-        projectedRotation = getNumOfRotationsFromPulses(newTargetRotation);
-
-        if (projectedRotation > MAX_ROTATION || projectedRotation < MINIMUM_ROTATION) {
-            return;
-        }
-
-        currentRotation = newTargetRotation / EncoderMath.PULSES_PER_MOTOR_REV;
-
-        arm.setTargetPosition(newTargetRotation);
-        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        while (elapsedTime.seconds() < timeout && arm.isBusy()) {
-            // Do nothing
-        }
-
+    private void stopRotate() {
         arm.setPower(0);
-
+        currentSpeed = 0;
     }
 
-    private double getNumOfRotationsFromPulses(double pulses) {
-        return pulses / EncoderMath.PULSES_PER_MOTOR_REV;
-    }
-
-    public double getCurrentRotation() {
-        return currentRotation;
+    public double getCurrentSpeed() {
+        return currentSpeed;
     }
 
     @Override
     public void update() {
         Gamepad gamepad = robot.gamepad2;
         if (gamepad.x) {
-            rotate(360, 1.0);
+            startRotate();
         }
         if (gamepad.b) {
-            rotate(360, 1.0);
+            stopRotate();
         }
     }
 }

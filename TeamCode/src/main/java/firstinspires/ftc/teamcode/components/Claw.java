@@ -3,6 +3,7 @@ package firstinspires.ftc.teamcode.components;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.Range;
 import firstinspires.ftc.teamcode.opmodes.BasicOpModeIterative;
 
 public class Claw extends ComponentBase {
@@ -18,18 +19,23 @@ public class Claw extends ComponentBase {
         claw = hardware.clawServo;
     }
 
-    public void openAndCloseClaw(Gamepad gamepad) {
+    private void openClaw() {
+        claw.setPosition(Range.clip(claw.getPosition() + INCREMENT_VAL, claw.getPosition(), 1.0));
+    }
 
-        if (gamepad.right_stick_x > 0) {
-            claw.setPosition((gamepad.right_stick_x + INCREMENT_VAL));
-        }
-        if (gamepad.right_stick_x < 0) {
-            claw.setPosition((gamepad.right_stick_x - INCREMENT_VAL));
-        }
+    private void closeClaw() {
+        claw.setPosition(Range.clip(claw.getPosition() + INCREMENT_VAL, claw.getPosition(), 1.0));
     }
 
     @Override
     public void update() {
+        Gamepad gamepad = robot.gamepad2;
 
+        if (gamepad.left_stick_y > 0) {
+            openClaw();
+        }
+        if (gamepad.left_stick_y < 0) {
+            closeClaw();
+        }
     }
 }

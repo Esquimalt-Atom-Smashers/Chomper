@@ -61,7 +61,7 @@ public class RobotHardware {
         setMotorModes(DcMotor.RunMode.RUN_WITHOUT_ENCODER, leftTopMotor, leftBottomMotor, rightTopMotor, rightBottomMotor, carouselMotor);
 
         //Sets the mode {RUN_USING_ENCODER} for the motor: linearExtension
-        setMotorModes(DcMotor.RunMode.RUN_USING_ENCODER, linearExtension, armMotor);
+        setMotorModes(DcMotor.RunMode.RUN_USING_ENCODER, linearExtension);
 
     }
     /*

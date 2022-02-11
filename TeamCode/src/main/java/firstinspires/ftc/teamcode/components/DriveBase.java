@@ -73,13 +73,15 @@ public class DriveBase extends ComponentBase {
         rightTopMotor.setPower(frontRightPower * .80);
         rightBottomMotor.setPower(backRightPower * .80);
     }
+
     public void spinCarousel() {
         carouselMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         carouselMotor.setPower(CAROUSEL_POWER);
-
     }
+
     public void stopCarousel() {
         carouselMotor.setPower(0.0);
     }
+
 }
 

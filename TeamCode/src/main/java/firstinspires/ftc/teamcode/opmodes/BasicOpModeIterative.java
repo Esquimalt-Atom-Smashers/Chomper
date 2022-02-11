@@ -53,9 +53,8 @@ public class BasicOpModeIterative extends LinearOpMode {
                 component.update();
             }
 
-            telemetry.addData("Current Rotation Arm: ", arm.getCurrentRotation());
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Linear extension Pos", linearExtension.getCurrentPositionCentimetres());
+            telemetry.addData("Status", "Run Time: " + runtime);
+            telemetry.addData("Current Arm Power", "Arm Power: " + arm.getCurrentSpeed());
             telemetry.update();
         }
     }
