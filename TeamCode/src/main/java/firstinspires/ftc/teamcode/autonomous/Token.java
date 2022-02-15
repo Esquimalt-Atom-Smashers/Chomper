@@ -9,6 +9,14 @@ public class Token implements Parseable {
         this.text = text;
     }
 
+    public static Token[] fromStrings(String... strings) {
+        Token[] tokens = new Token[strings.length];
+        for (int i = 0, size = strings.length; i < size; i++) {
+            tokens[i] = new Token(strings[i]);
+        }
+        return tokens;
+    }
+
     @Override
     public int matches(String text) {
         int offset = 0;

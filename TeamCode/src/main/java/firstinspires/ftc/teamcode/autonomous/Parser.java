@@ -15,7 +15,10 @@ public final class Parser {
     private static final List<Parseable> PARSEABLES = new ArrayList<>();
 
     static {
-
+        Token[] commandPrefixes = Token.fromStrings(
+                "move", "spin", "wait", "angle", "forward", "upward", "for", "at", "speed",
+                "x", "y"
+        );
     }
 
 //    private static String[] lexerParse(String text) {
