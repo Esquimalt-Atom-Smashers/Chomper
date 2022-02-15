@@ -1,7 +1,6 @@
 package firstinspires.ftc.teamcode.components;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import firstinspires.ftc.teamcode.opmodes.BasicOpModeIterative;
 
