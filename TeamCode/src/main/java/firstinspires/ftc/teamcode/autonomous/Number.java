@@ -10,13 +10,15 @@ public class Number implements Type<Double> {
     @Override
     public int matches(String text) {
         int lenBeforeTrim = text.length();
+        // Remove leading whitespace
         while (Character.isWhitespace(text.charAt(0))) {
             text = text.substring(1);
             if (text.isEmpty()) return -1;
         }
+        // Keep track of amount of whitespace removed
         int offset = lenBeforeTrim - text.length();
-        char[] chars = text.toCharArray();
 
+        char[] chars = text.toCharArray();
         boolean onNumbers = false;
 
         for (int i = 0, charsLength = chars.length; i < charsLength; i++) {
