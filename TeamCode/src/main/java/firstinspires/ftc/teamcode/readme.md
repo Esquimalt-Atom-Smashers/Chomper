@@ -11,4 +11,12 @@ System.out.println("Hello, world!");
 </details>
 
 
+<details><summary>When does a joke become a dad joke?</summary>
 
+
+<p>
+When it becomes apparent 
+  </p>
+
+
+</details>
